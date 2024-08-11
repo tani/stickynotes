@@ -9,19 +9,20 @@ const appBody = css`
 `
 
 const cardContainer = css`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: minmax(400px, 1fr) 70px;
-  gap: 10px;
+  column-count: 3;
+  @media (max-width: 1200px) {
+    column-count: 2;
+  }
+  @media (max-width: 800px) {
+    column-count: 1;
+  }
 `;
 
 const card = css`
   border: 1px solid #ccc;
   border-radius: 1px;
   padding: 10px;
-  display: grid;
-  grid-template-rows: subgrid;
-  grid-row: span 2;
+  break-inside: avoid;
 `;
 
 export default function App() {
