@@ -1,6 +1,8 @@
 import { createRoute } from 'honox/factory'
 import { css } from 'hono/css'
 
+export const title = "Stickynotes | Masaya Taniguchi"
+
 const appBody = css`
   margin: 10px;
   font-family: "Times New Roman", "YuMincho", "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho", serif;
