@@ -7,12 +7,10 @@ import remarkMath from 'remark-math'
 import rehypeMathjax from 'rehype-mathjax/svg'
 import rehypeInlineCss from 'rehype-inline-css'
 import honox from 'honox/vite'
-import unocss from 'unocss/vite'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
   plugins: [
-    unocss(),
     honox({ devServer: { adapter } }),
     mdx({
       jsxImportSource: 'hono/jsx',

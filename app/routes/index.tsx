@@ -1,10 +1,31 @@
 import { createRoute } from 'honox/factory'
-import Counter from '../islands/counter'
+import { css } from 'hono/css'
+
+const appBody = css`
+  margin: 10px;
+  font-family: "Times New Roman", "YuMincho", "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho", serif;
+`
+
+const cardContainer = css`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: minmax(400px, 1fr) 70px;
+  gap: 10px;
+`;
+
+const card = css`
+  border: 1px solid #ccc;
+  border-radius: 1px;
+  padding: 10px;
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 2;
+`;
 
 export default function App() {
   const posts = import.meta.glob("../posts/*.mdx", { eager: true }) as any;
   return (
-    <div font="sans">
+    <div class={ appBody }>
       <h1>Stickynotes</h1>
       <p>
         とるにたらない数学のメモを書いていくサイトです。自由に見てください。
@@ -17,15 +38,15 @@ export default function App() {
         文責は全て私にあります。謝辞にある方々への直接の問い合わせはご遠慮ください。
       </p>
       <hr />
-      <div m="1" grid="" grid-cols="3" grid-rows="[minmax(400px,1fr)_50px]" gap="2">
+      <div class={cardContainer}>
         {Object.keys(posts).map((path) => {
           const post = posts[path];
           return (
-            <div grid="" row-span="2" grid-rows="subgrid" border="gray-400 solid 1 rounded" p="3" font="serif">
-              <div prose="">
+            <div class={card}>
+              <div>
                 <post.default />
               </div>
-              <div prose="">
+              <div>
                 <p>Date: {post.frontmatter.date}</p>
               </div>
             </div>
