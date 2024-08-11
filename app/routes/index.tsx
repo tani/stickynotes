@@ -4,8 +4,9 @@ import { css } from 'hono/css'
 export const title = "Stickynotes | Masaya Taniguchi"
 
 const appBody = css`
-  margin: 10px;
+  background-color: #fdfdfd;
   font-family: "Times New Roman", "YuMincho", "Hiragino Mincho ProN", "Yu Mincho", "MS PMincho", serif;
+  margin: 10px;
 `
 
 const cardContainer = css`
@@ -19,11 +20,17 @@ const cardContainer = css`
 `;
 
 const card = css`
-  border: 1px solid #ccc;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   border-radius: 1px;
-  padding: 10px;
+  padding: 30px 50px;
   break-inside: avoid;
 `;
+
+const date = css`
+  font-size: 0.8em;
+  color: #999;
+`
 
 export default function App() {
   const posts = import.meta.glob("../posts/*.mdx", { eager: true }) as any;
@@ -41,21 +48,18 @@ export default function App() {
         文責は全て私にあります。謝辞にある方々への直接の問い合わせはご遠慮ください。
       </p>
       <hr />
-      <div class={cardContainer}>
+      <main class={cardContainer}>
         {Object.keys(posts).map((path) => {
           const post = posts[path];
           return (
-            <div class={card}>
-              <div>
-                <post.default />
-              </div>
-              <div>
-                <p>Date: {post.frontmatter.date}</p>
-              </div>
-            </div>
+            <article class={card}>
+              <post.default />
+              <hr />
+              <p class={date}>Date: {post.frontmatter.date}</p>
+            </article>
           )
         })}
-      </div>
+      </main>
     </div>
   )
 }
