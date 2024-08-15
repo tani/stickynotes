@@ -13,6 +13,7 @@
     "@mdx-js/rollup": "^3.0.1",
     "hono": "^4.5.4",
     "honox": "^0.1.23",
+    "modern-normalize": "^3.0.0",
     "rehype-inline-css": "^0.5.1",
     "rehype-mathjax": "^6.0.0",
     "remark-frontmatter": "^5.0.0",
