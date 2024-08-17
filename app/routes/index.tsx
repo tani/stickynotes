@@ -53,9 +53,9 @@ export default function App() {
           const post = posts[path];
           return (
             <article class={card}>
-              <post.default />
+              { post.default }
               <hr />
-              <p class={date}>Date: {post.frontmatter.date}</p>
+              <p class={date}>Date: {post.date}</p>
             </article>
           )
         })}

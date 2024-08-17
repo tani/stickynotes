@@ -1,28 +1,40 @@
 import pages from '@hono/vite-cloudflare-pages'
 import adapter from '@hono/vite-dev-server/cloudflare'
-import mdx from '@mdx-js/rollup'
-import remarkFrontmatter from 'remark-frontmatter'
-import remarkMdxFrontmatter from 'remark-mdx-frontmatter'
-import remarkMath from 'remark-math'
-import rehypeMathjax from 'rehype-mathjax/svg'
-import rehypeInlineCss from 'rehype-inline-css'
 import honox from 'honox/vite'
 import { defineConfig } from 'vite'
+import jsxify from 'unplugin-jsxify/vite'
+import markdownIt from 'markdown-it'
+import mathjax3 from 'markdown-it-mathjax3';
+import frontMatter from 'front-matter';
 
 export default defineConfig({
+  build: {
+    rollupOptions: {
+      external: ['html-react-parser'],
+    },
+  },
+  ssr: {
+    external: ['html-react-parser'],
+  },
   plugins: [
     honox({ devServer: { adapter } }),
-    mdx({
-      jsxImportSource: 'hono/jsx',
-      remarkPlugins: [
-        remarkFrontmatter,
-        remarkMdxFrontmatter,
-        remarkMath
-      ],
-      rehypePlugins: [
-        [rehypeMathjax, {svg: {fontCache: 'none'}}],
-        rehypeInlineCss
-      ]
+    jsxify({
+      default: {
+        jsxImportSource: 'hono/jsx',
+      },
+      markdown: {
+        extensions: ['.md', '.mdx'],
+        render(source) {
+          const { body } = frontMatter(source);
+          const md = markdownIt()
+          md.use(mathjax3)
+          return md.render(body)
+        },
+        extract(source) {
+          const { attributes } = frontMatter(source);
+          return attributes as Record<string, unknown>;
+        }
+      }
     }),
     pages()
   ]

@@ -10,20 +10,19 @@
   "private": true,
   "dependencies": {
     "@hono/vite-ssg": "^0.1.0",
-    "@mdx-js/rollup": "^3.0.1",
+    "front-matter": "^4.0.2",
     "hono": "^4.5.4",
     "honox": "^0.1.23",
+    "markdown-it": "^14.1.0",
+    "markdown-it-mathjax3": "^4.3.2",
     "modern-normalize": "^3.0.0",
-    "rehype-inline-css": "^0.5.1",
-    "rehype-mathjax": "^6.0.0",
-    "remark-frontmatter": "^5.0.0",
-    "remark-math": "^6.0.0",
-    "remark-mdx-frontmatter": "^5.0.0"
+    "unplugin-jsxify": "^0.1.1"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240529.0",
     "@hono/vite-cloudflare-pages": "^0.4.2",
     "@hono/vite-dev-server": "^0.13.1",
+    "@types/markdown-it": "^14.1.2",
     "vite": "^5.2.12",
     "wrangler": "^3.57.2"
   }
